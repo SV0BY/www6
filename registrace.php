@@ -2,20 +2,20 @@
  <?php
  session_start();
  require_once ("connect.php");
- if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['id']) && empty($_POST['ne'])){
+ if(isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['psw'])){
     try {
  
-     $stmt = $conn->prepare("INSERT INTO uzivatel (jmeno, prijmeni, id)
-   VALUES (:jmeno, :prijmeni, :id)");
+     $stmt = $conn->prepare("INSERT INTO www6 (jmeno, prijmeni, email, telefon, heslo)
+   VALUES (:jmeno, :prijmeni, :email, :telefon, :heslo)");
    $stmt->bindParam(':jmeno', $_POST['fname']);
    $stmt->bindParam(':prijmeni', $_POST['lname']);
-   $stmt->bindParam(':id', $_POST['id']);
+   $stmt->bindParam(':email', $_POST['email']);
+   $stmt->bindParam(':telefon', $_POST['phone']);
+   $stmt->bindParam(':heslo', $_POST['psw']);
  
    $stmt -> execute();
  
    echo "Registrace probehla uspesne";
-   $_SESSION["jmeno"] = $_POST['fname'];
-   header("Location: stranka.php");
    
  }catch(PDOException $e){
      $errorInfo = $e->errorInfo; 
