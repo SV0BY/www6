@@ -16,6 +16,8 @@
    $stmt -> execute();
  
    echo "Registrace probehla uspesne";
+   $_SESSION["jmeno"] = $_POST['fname'];
+   header("Location: index.php");
    
  }catch(PDOException $e){
      $errorInfo = $e->errorInfo; 
